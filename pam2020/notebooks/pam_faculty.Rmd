@@ -1,0 +1,17 @@
+---
+title: "PAM 2020: Responses by faculty"
+output:
+  github_document: default
+---
+
+```{r include = FALSE}
+source("init.R")
+preconf <- preconf[c(which(preconf$seniority == "Faculty"), which(preconf$seniority == "Postdoc")),]
+postconf <- postconf[c(which(postconf$seniority == "Faculty"), which(preconf$seniority == "Postdoc")),]
+```
+
+This document contains results to the PAM 2020 questionnaires by *faculty participants* only.
+We define industry as a combination of "Faculty" and "Postdoc" since they potentially share the same objectives in attending.
+
+```{r, child=c('pam_base_preconf.Rmd', 'pam_base_postconf.Rmd')}
+```

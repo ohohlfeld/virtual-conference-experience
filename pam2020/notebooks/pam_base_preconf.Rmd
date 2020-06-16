@@ -1,0 +1,123 @@
+# Pre-Conf Questionnaire
+
+Number of responses:
+```{r echo = FALSE}
+nrow(preconf)
+```
+
+## Personal Details
+How many PAM conferences have you attended, including this one?
+```{r echo = FALSE}
+plotFactorDistribution(preconf, "numPAMs", "How many PAM conferences have you attended, including this one?")
+```
+
+In which timezone are you?
+
+```
+preconf$timezone <- recode(preconf$timezone,
+       "(GMT -8:00) Pacific Time (US & Canada)" = "-8",
+       "(GMT -5:00) Eastern Time (US & Canada), Bogota, Lima" = "-5",
+       "(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz" = "-4",
+       "(GMT +1:00) Brussels, Copenhagen, Madrid, Paris" = "+1",
+       "(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg" = "+3",
+       "(GMT +8:00) Beijing, Perth, Singapore, Hong Kong" = "+8"
+)
+```
+
+```{r echo = FALSE}
+plotFactorDistribution(preconf, "timezone", "In which timezone are you?")
+```
+
+From where are you participating in PAM?
+```{r echo = FALSE}
+plotFactorDistribution(preconf, "location", "From where are you participating in PAM?")
+```
+
+Please rate your professional seniority
+```{r echo = FALSE}
+plotFactorDistribution(preconf, "seniority", "Please rate your professional seniority")
+```
+
+Have you attended a remote conference before?
+```{r echo = FALSE}
+plotFactorDistribution(preconf, "priorRemoteExperience", "Please rate your professional seniority")
+```
+
+Would you have attended PAM as on-site conference in Oregon?
+```{r echo = FALSE}
+plotFactorDistribution(preconf, "visitOregon", "Would you have attended PAM as on-site conference in Oregon?")
+```
+
+## Planned participation
+
+Do you intend to use the conference Slack/Zoom as virtual hallway track?
+```{r echo = FALSE}
+plotFactorDistribution(preconf, "intendedUseSlackZoomForHallwayTrack", "Do you intend to use the conference Slack/Zoom as virtual hallway track?")
+```
+
+In which sessions do you plan to participate?
+```{r echo = FALSE}
+plotFactorDistribution(preconf, "intendedSessionAttendance", "In which sessions do you plan to participate?")
+```
+
+Do you think you would attend more sessions if you would have attended PAM as on-site venue?
+```{r echo = FALSE}
+plotFactorDistribution(preconf, "attendMoreSessionsIfOnsite", "Do you think you would attend more sessions if you would have attended PAM as on-site venue?")
+```
+
+## Your goals when attending a on-site conference (e.g., prior editions of PAM)
+
+To begin with, please tell us about your goals when attending an *on-site conference in person* (such as PAM in the previous years). We will ask you to your goals when attending PAM as online conference in the next section.
+
+Importance of presenting my work to this community
+```{r echo = FALSE}
+plotFactorDistribution(preconf, "onsiteImportanceOfPresentingMyWork", "Importance of presenting my work to this community")
+```
+
+Importance of following paper/poster presentations
+```{r echo = FALSE}
+plotFactorDistribution(preconf, "onsiteImportanceOfPapers", "Importance of following paper/poster presentations")
+```
+
+Importance of interacting with other researchers I already know
+```{r echo = FALSE}
+plotFactorDistribution(preconf, "onsiteImportanceOfInteractingWithKnownResearchers", "Importance of interacting with other researchers I already know")
+```
+
+Importance of meeting new researchers
+```{r echo = FALSE}
+plotFactorDistribution(preconf, "onsiteImportanceOfMeetingNewResearchers", "Importance of meeting new researchers")
+```
+
+Importance of visiting the city/country in which the conference is held
+```{r echo = FALSE}
+plotFactorDistribution(preconf, "onsiteImportanceOfLocation", "onsite-importanceOfLocation")
+```
+
+## Your goals when attending PAM as virtual conference
+
+Importance of presenting my work to this community
+```{r echo = FALSE}
+plotFactorDistribution(preconf, "virtualconfImportanceOfPresentingMyWork", "Importance of presenting my work to this community")
+```
+
+Importance of following paper/poster presentations
+```{r echo = FALSE}
+plotFactorDistribution(preconf, "virtualconfImportanceOfPapers", "Importance of following paper/poster presentations")
+```
+
+Importance of interacting with other researchers I already know
+```{r echo = FALSE}
+plotFactorDistribution(preconf, "virtualconfImportanceOfInteractingWithKnownResearchers", "Importance of interacting with other researchers I already know")
+```
+
+Importance of meeting new researchers
+```{r echo = FALSE}
+plotFactorDistribution(preconf, "virtualconfImportanceOfMeetingNewResearchers", "Importance of meeting new researchers")
+```
+
+## Other comments (optional)
+Do you have other feedback / wishes / comments that you would like to share?
+```{r rech = FALSE}
+preconf$feedback
+```

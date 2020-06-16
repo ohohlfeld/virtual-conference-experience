@@ -1,0 +1,325 @@
+# Post-Conf Questionnaire
+Number of responses:
+```{r echo = FALSE}
+nrow(postconf)
+```
+
+## Personal details
+We first would like to learn few personal details about you to be able to better interpret your answers in this questionnaire.
+
+Note that these questions are the same as in the pre-conference questionnaire since we cannot correlate both questionnaires due to anonymity.
+
+How many PAM conferences have you attended, including this one?
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "numPAMs", "How many PAM conferences have you attended, including this one?")
+```
+
+In which timezone are you?
+
+```
+postconf$timezone <- recode(postconf$timezone,
+       "(GMT -8:00) Pacific Time (US & Canada)" = "-8",
+       "(GMT -7:00) Mountain Time (US & Canada)" = "-7",
+       "(GMT -5:00) Eastern Time (US & Canada), Bogota, Lima" = "-5",
+       "(GMT) Western Europe Time, London, Lisbon, Casablanca" = "+0",
+       "(GMT +1:00) Brussels, Copenhagen, Madrid, Paris" = "+1",
+       "(GMT +8:00) Beijing, Perth, Singapore, Hong Kong" = "+8"
+)
+```
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "timezone", "In which timezone are you?")
+```
+
+From where are you participating in PAM?
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "location", "From where are you participating in PAM?")
+```
+
+Please rate your professional seniority
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "seniority", "Please rate your professional seniority")
+```
+
+Have you attended a remote conference before?
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "priorRemoteExperience", "Please rate your professional seniority")
+```
+
+Would you have attended PAM as on-site conference in Oregon?
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "visitOregon", "Would you have attended PAM as on-site conference in Oregon?")
+```
+
+## Overall Experience
+
+This block is about assessing your overall experience of attending PAM as virtual conference. Did you enjoy it?
+
+### Overall Experience
+My overall experience of attending remotely PAM is
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "overallExperience", "Overall Experience")
+```
+
+### Compared to attending on-site, attending remotely allowed me to better focus on the conference
+
+I was more focused on the *technical content*
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "focusOnContent", "I was more focused on the technical content")
+```
+
+I was more focused on *social interactions*
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "focusOnInteractions", "I was more focused on social interactions")
+```
+
+### My expectations on attending a virtual conference were met
+
+To present my work
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "expectationPresentWork", "To present my work")
+```
+
+To follow presentations
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "expectationFollowPresentations", "To follow presentations")
+```
+
+To interact with speakers
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "expectationInteractWithSpeakers", "To interact with speakers")
+```
+
+To interact with participants
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "expectationInteractWithParticipants", "To interact with participants")
+```
+
+### (optional) To speakers: My expectations on attending a virtual conference were met
+
+This is a bug: the question was asked twice (mandatory above), optionally here.
+
+To present my work
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "expectationSpeakersPresentWork", "To present my work")
+```
+
+### Would you attend more conferences each year if they are offered online
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "attendMoreConfsIfOnline", "Would you attend more conferences each year if they are offered online")
+```
+
+## Talk Sessions
+
+In this section, we are interested how you experienced the talks sessions (i.e., paper and poster presentations).
+
+### What tools did you use to participate in the conference and how well did they work?
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "zoom", "Zoom")
+```
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "slack", "Slack")
+```
+
+### How do you rate the presentation sessions of this virtual conference compared to on-site conferences?
+
+Ability to attend talks
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "presentationsAttendTalks", "Ability to attend talks")
+```
+
+Ability to focus on the talks without distractions
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "presentationDistractions", "Ability to focus on the talks without distractions")
+```
+
+Ability to ask questions
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "askQuestions", "Ability to ask questions")
+```
+
+Ability to deeply discuss a topic openly with all participants
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "discuss", "Ability to deeply discuss a topic openly with all participants")
+```
+
+### Did you experience video or audio degradations in Zoom?
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "audioImpairments", "Audio Degradations")
+```
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "videoImpairments", "Video Degradations")
+```
+
+### Which one of the following factors during the online presentations affected your interest or ability to follow the talk or remain engage
+
+Having a video of the speaker in the corner of slides
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "speakerVideoOnSlides", "Having a video of the speaker in the corner of slides")
+```
+
+Presenter’s tone of speaking
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "speakersToneOfSpeaking", "Presenter’s tone of speaking")
+```
+
+Changing of the audio across different segments of the presentation
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "speakersAudioChange", "Changing of the audio across different segments of the presentation")
+```
+
+### Pros/Cons of pre-recorded talks
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "prosConsPreRecordedTaks", "")
+```
+
+### (optional) Pros: What did you like about pre-recorded talks?
+```{r echo = FALSE}
+postconf$textProsPreRecordedTalks
+```
+
+### (optional) Cons: What did you not like about pre-recorded talks?
+```{r echo = FALSE}
+postconf$textConsPreRecordedTalks
+```
+
+### How many paper sessions did you skip due to time zone differences
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "skippedSessions", "How many paper sessions did you skip due to time zone differences")
+```
+
+## Presentation-related Interactions
+
+This section is about how you interacted with other participants about the content presented at the conference in terms of papers and posters.
+
+### Did you participate in technical discussions on Slack or Zoom?
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "participateSlackZoom", "Did you participate in technical discussions on Slack or Zoom?")
+```
+
+### How do you rate the interaction with others during this virtual conference compared to on-site conferences?
+Ability to ask questions
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "conferenceInteractionAskQuestions", "Ability to ask questions")
+```
+
+Moderation of questions by the session chairs when posting to the Zoom chat
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "conferenceInteractionModeration", "Moderation of questions by the session chairs when posting to the Zoom chat")
+```
+
+Ability for detailed technical discussions
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "conferenceInteractionDiscussion", "Ability for detailed technical discussions")
+```
+
+### With how many participants did you interact in *private* chats?
+
+Slack private chats
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "numberOfParticipantsSlackPrivateChat", "Slack private chats")
+```
+
+Zoom private chats
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "numberOfParticipantsZoomPrivateChat", "Zoom private chats")
+```
+
+### (optional): Pros: Other feedback on *positive* aspects of the ability to interact during this virtual conference
+```{r echo = FALSE}
+postconf$textProsInteraction
+```
+
+### (optional): Cons: Other feedback on *negative* aspects of the ability to interact during this virtual conference
+
+```{r echo = FALSE}
+postconf$textConsInteraction
+```
+
+## Social Interactions (Virtual Hallway Track)
+Besides content related to technical presentations (papers / posters), conferences are about general interactions with known and new researchers (e.g., during breaks or at the dinner table): the hallway track. We are interested in this section how you experienced the hallway track at PAM.
+
+### Did you use Slack or the Zoom chat to interact with others about topics unrelated to the presentations?
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "useSlackZoom", "")
+```
+
+### How do you rate the quality of social interactions (unrelated to the presentations) during this virtual conference compared to classical on-site conferences?
+Interactions with researchers I already know
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "hallwaytrackInteractionWithKnownResearchers", "Interactions with researchers I already know")
+```
+
+Interactions with new researchers I didn't know before
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "hallwaytrackInteractionWithNewResearchers", "Interactions with new researchers I didn't know before")
+```
+
+### (optional) What did you enjoy about social interaction at this virtual conference?
+
+```{r echo = FALSE}
+postconf$textProsHallway
+```
+
+### (optional) How can social interactions be improved at virtual conferences?
+
+```{r echo = FALSE}
+postconf$textConsHallway
+```
+
+## General comments about remote attendance
+
+### I would like to attend more virtual conferences in the future
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "attendMoreVirtualConfsInFuture", "I would like to attend more virtual conferences in the future")
+```
+
+### How many venues should be virtual in the future?
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "shareFutureVirtualConfs", "How many venues should be virtual in the future?")
+```
+
+### Net Promotor Score: How likely is it that you would recommend attending PAM as virtual conference to a colleague?
+0 Not at all likely to recommend - 10 Extremely likely to recommend
+
+```{r echo = FALSE}
+plotFactorDistribution(postconf, "nps", "NPS")
+```
+
+### Pros: What worked well about attending remotely
+```{r echo = FALSE}
+postconf$textPros
+```
+
+### Cons: What did not work well about attending remotely
+```{r echo = FALSE}
+postconf$textCons
+```
+
+### Other comments / suggestions / feedback
+```{r echo = FALSE}
+postconf$textGeneralComments
+```

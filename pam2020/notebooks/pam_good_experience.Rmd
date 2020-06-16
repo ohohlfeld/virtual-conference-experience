@@ -1,0 +1,15 @@
+---
+title: "PAM 2020: Responses by users with good experience"
+output:
+  github_document: default
+---
+
+```{r include = FALSE}
+source("init.R")
+postconf <- postconf[c(which(postconf$overallExperience == "good"), which(postconf$overallExperience == "excellent")),]
+```
+
+This document contains results to the PAM 2020 questionnaires.
+
+```{r, child=c('pam_base_postconf.Rmd')}
+```
