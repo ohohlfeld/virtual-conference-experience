@@ -21,7 +21,7 @@ These applications have highlighted the usefulness of the presented survey appro
 
 ## Obtaining the Questionnaire
 
-To ease the adoption of our survey approach, we provide a HTML implementation based on [TheFragebogen](https://thefragebogen.de/). This HTML version can easily copied to other survey frameworks, e.g., Google Forms (which we have also used to run the questionnaires).
+To ease the adoption of our survey approach, we provide a HTML implementation based on [TheFragebogen](https://thefragebogen.de/). This HTML version can easily copied to other survey frameworks, e.g., Google Forms (which we have also used to run the questionnaires, see below).
 
 HTML versions for preview:
 * [Pre-conference questionnaire](https://ohohlfeld.github.io/virtual-conference-experience/pre-conference.html)
