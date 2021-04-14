@@ -21,5 +21,18 @@ These applications have highlighted the usefulness of the presented survey appro
 
 ## Obtaining the Questionnaire
 
+To ease the adoption of our survey approach, we provide a HTML implementation based on [TheFragebogen](https://thefragebogen.de/). This HTML version can easily copied to other survey frameworks, e.g., Google Forms (which we have also used to run the questionnaires).
+
+HTML versions for preview:
+* [Pre-conference questionnaire](https://ohohlfeld.github.io/virtual-conference-experience/pre-conference.html)
+* [Post-conference questionnaire](https://ohohlfeld.github.io/virtual-conference-experience/post-conference.html)
+
+The sources are available [here](questionnaires/).
 
 ## Data and Analysis Scripts
+
+Our survey approach has already shown to be a useful tool to shed light on virtual conference participants' experiences of five venues we used it so far. One of the first conferences that moved to an online format was [PAM 2020](https://ccronline.sigcomm.org/wp-content/uploads/2020/08/sigcomm-ccr-final432.pdf). As an example of how to analyze data obtained with our survey approach, we provide the entire dataset and the scripts to analyze the participants experience of PAM 2020. The data is avilable [here](pam2020/).
+
+Note that we used an earlier version of our survey approach for PAM 2020, implemented in Google Forms:
+* [PAM 2020 Pre-conference questionnaire](https://github.com/ohohlfeld/virtual-conference-experience/blob/master/pam2020/PAM-Pre_conference_questionnaire.pdf)
+* [PAM 2020 Post-conference questionnaire](https://github.com/ohohlfeld/virtual-conference-experience/blob/master/pam2020/PAM-Post_conference_questionnaire.pdf)
