@@ -56,7 +56,7 @@
 
  
 
-\title{A Questionnaire to Assess Virtual Conference Participation Experience}
+\title{A Questionnaire to Assess\\Virtual Conference Participation Experience}
 
 \author{Oliver Hohlfeld}
 \email{hohlfeld@b-tu.de}
@@ -64,22 +64,20 @@
 
 \author{Dennis Guse}
 \email{dennis.guse@alumni.tu-berlin.de}
+\affiliation{}
 
-\begin{teaserfigure}
-	\parbox{\textwidth}{\centering\normalsize
-		This articel is a technical report documenting the questionnaire not a scientific paper and has NOT been peer reviewed.\\
-	}
-	\vspace{10pt}
-\end{teaserfigure}
+\author{Katrien De Moor}
+\email{katrien.demoor@item.ntnu.no}
+\affiliation{\institution{NTNU}}
+
 \keywords{User experience, COVID-19, academic conferences}
 
 \begin{abstract}
-This technical report describes the preliminary design of a questionnaire to assess the participants experience of virtual conferences, compared to classical on-site conferences.
-The survey approach consists of a pre-conference questionnaire assessing participation goals and a post-conference questionnaire assessing the participation experience.
-It enables a data-driven investigation of the participant's experience, goals, and general feedback about virtual conferences.
-Beyond its original goal of assessing virtual conferences, the questionnaire enables to assess goals of conference participation.
-The questionnaire was successfully used at one conference and two workshop.
-A HTML version and data is provided by a companion repository.
+This tools track paper presents the design of a questionnaire as new methodology to assess the participants experience of virtual conferences.
+This survey approach consists of a pre-conference questionnaire assessing participation goals and expectations and a post-conference questionnaire assessing the actual participation and related experiences.
+It enables a data-driven investigation of participants' expectations, goals, attitudes, actual experiences, and general feedback about virtual conferences.
+As such, it can help to better understand how virtual conference experiences can be improved in the future and how the virtual format can become a more attractive alternative, also in non-pandemic times.
+The questionnaire was successfully used at three conferences and two workshops.
 It is released early to foster research on virtual conferences.
 \end{abstract}
 
@@ -89,635 +87,150 @@ It is released early to foster research on virtual conferences.
 \sloppypar
 \pagestyle{plain}
 
-\section{Introduction}
-The outbreak of the COVID-19 pandemic in 2020 forced academic conference to move to an online format with only little preparation time and prior experience.
-This necessity for virtual conferences is rooted travel restrictions and social distancing enforced by many governments around the world as a response to the outbreak.
+\section{Introduction and Motivation}
+The outbreak of the COVID-19 pandemic in 2020 and ensuing travel restrictions and social distancing rules forced academic conferences around the globe to move to an online format with only little preparation time and prior experience~\cite{bonifati2020holding, ASPLOS,alex2020flexibility}.
+In many fields (e.g., in computer science), the dominant publication model still relies on in-person conferences and workshops to disseminate work and to open-up new directions for future work.
+Besides discussions also social bonds emerge that strengthen the scientific community and networking possibilities have been identified previously as a crucial affordance of traditional, in-person formats~\cite{raby2021moving}.
+As the pandemic disrupted this traditional scientific conference format, the question emerged how the traditional conference experience can successfully moved to an online format. 
 
-%
-%
-The dominant publication model of many communities (e.g., in computer science) relies on in-person conferences and workshops to disseminate work and to open-up new directions for future work.
-Besides discussions also social bonds emerge that strengthen the scientific community.
-In light of the measures to fight the pandemic, such in-person gathering were no longer possible and had to either canceled or moved to an online format (see e.g.,~\cite{bonifati2020holding, ASPLOS,alex2020flexibility}).
-Once successfully established, virtual conferences might be the future~\cite{virtConferencesFuture}.
-%
-%
-%
-%
-%
-%
-%
-%
-Up to the outbreak, only few venues experimented with means for remote attendance (e.g., using telepresence robots~\cite{RobotAttendance, RobotAttendance2018}).
-The Internet Engineering Task Force (IETF) enables remote attendance for their meetings and few other conferences provide live streams (e.g., network operator meetings such as RIPE or the Chaos Communication Congress).
-Despite these isolated efforts, the academic community has not largely moved to organizing all-virtual conferences---a new format~\cite{Price457} that needed to be realized from one day to the next as a result of the pandemic.
 
-While the organization of on-site conferences and meetings follows established practices, largely moving academic conferences to an online format is new and thus little to no prior experience exists.
-As a result, an ACM Presidential Task Force was formed in March to provide quick advice to conference organizers suddenly facing the need to move their conference online in light of the social distancing recommendations and global restrictions on travel due to the COVID-19 pandemic~\cite{virtConfTaskforce}.
-While different design guidelines for organizing virtual conferences emerged, the participants experience is not yet understood. 
-Do virtual conferences provide value beyond on-site conferences and might stay?
-Do participants enjoy participating in virtual conferences?
-Which aspects of current virtual conference designs do not yet work well and need improvement?
+Prior experience in alternative conference attendance formats---e.g., hybrid participation using telepresence robots~\cite{RobotAttendance, RobotAttendance2018}---existed in only some fields.
+The Internet Engineering Task Force~(IETF) enables remote attendance for their meetings and few other conferences provide live streams (e.g., network operator meetings such as RIPE or the Chaos Communication Congress).
+Despite these isolated efforts, the academic community at large had not moved to organizing all-virtual conferences---a new format~\cite{Price457} that needed to be realized from one day to the next as a result of the pandemic.
 
-To shed light on these questions, we present a questionnaire to assess the participants experience of attending virtual conferences.
-This enables a data-driven investigation of the participant's experience, goals, and general feedback about virtual conferences.
-It assesses virtual conference attendance relative to prior experience in attending on-site conferences---and thus assumes that such experience exists (asked as part of the questionnaire).
-This way, potential limitations, opportunities, and challenges of virtual conferences can be understood.
-Lessons learned by surveying participants can be used to improve the design of future virtual conferences.
-In the absence of established questionnaires to assess the participants experience of virtual conferences and to compare it to on-site versions, we designed the questionnaire in early March 2020 and have successfully applied it at one conferences~\cite{PAM2020} and two workshops~\cite{ItSecWorkshop, KuvsNetsoft}. 
+Once successfully established, virtual / hybrid conferences might be the future~\cite{virtConferencesFuture}.
+Positive outcomes that are related to the forced transition to virtual conferences and that have been reported in the literature include e.g., increased participation \cite{castelvecchi2020loving}, increased societal outreach \cite{foramitti2021virtues}, and travel-related carbon emissions savings \cite{klower2020analysis}. 
+It has also been argued that the ongoing experimentation with virtual conferences offers a unique possibility to address inequitable conditions associated to more traditional conference formats \cite{niner2020pandemic}.
+However, an important pre-condition is that online conferences are able to provide value in a similar way as traditional conference formats: that they engage participants and enable them to meet their goals when attending a scientific conference.
+In addition, it needs to be kept in mind that digital participation may also lead to inequalities and a loss of diversity if a number of critical requirements are not properly addressed \cite{niner2020pandemic}.
+
+While the organization of on-site conferences and meetings follows established practices, moving academic conferences entirely to an online format is new and thus little to no prior experience exists.
+As a result, an ACM Presidential Task Force was formed in March 2020 to provide quick advice to conference organizers suddenly facing the need to move their conference online~\cite{virtConfTaskforce}.
+While different design guidelines for organizing virtual conferences emerged, a key challenge is that the participant experience is not yet fully understood. 
+Do virtual conferences provide value beyond on-site conferences and might be there to stay?
+Do participants enjoy participating in virtual conferences and what is needed to foster engagement in a virtual conference setting?
+Which aspects of current virtual conference designs do not yet work well?
+
+\afblock{Contribution.}
+To shed light on these questions, we present a new survey approach to assess the participants experience of attending virtual conferences.
+It enables a data-driven investigation of participant's expectations, goals, attitudes, actual experiences and general feedback about virtual conferences.
+Optionally, it can assess virtual conference attendance relative to prior experience in attending on-site conferences---assuming that such experience exists (assessed as part of the questionnaire).
+This way, potential limitations, opportunities, and challenges of virtual conferences can be understood both from a more general perspective and in the light of the concrete virtual conference set-up.
+Lessons learned by surveying participants enable to improve the design of future virtual conferences.
+
+In the absence of established questionnaires to assess the participants experience of virtual conferences and to compare it to on-site versions, we designed the questionnaire in a first version early March 2020 and have successfully applied it at three conferences~\cite{PAM2020,pamexperience,QoMEX2020,PAM2021} and two workshops~\cite{ItSecWorkshop, KuvsNetsoft}.
+These applications have highlighted the usefulness of the presented survey approach and the obtained feedback enabled its gradual improvement, up to this version that we find useful to publicly share and motivate its adoption. 
+
+\afblock{Survey Tool Release.}
+To enable every conference organizer to easily apply our survey approach and thereby to foster research on virtual conference experience, we release it openly.
 We maintain a public repository~\cite{VirtualConferencesGithub} that contains raw data, analysis scripts, and an HTML version of this questionnaire implemented using TheFragebogen~\cite{TheFragebogen}.
-While there are many angles for improvement and the reliability of the questionnaire cannot be assessed with only few applications yet, we already found it a useful tool to shed light on the participants experience of the three venues we used it so far.
-We thus decided to share its preliminary design publicly to be used and extended.
+While there are many angles for improvement and the reliability of the questionnaire cannot be assessed with only few applications yet, it has already shown to be a useful tool to shed light on virtual conference participants' experiences of the five venues we used it so far.
+We thus decided to share its design publicly to be used and extended.
 Beyond its original goal of assessing virtual conferences, the questionnaire enables to assess goals of conference participation---aspects that haven't been analyzed in many communities and can likewise inform the design of on-site conferences.
-With this, we aim to provide a tool for assessing the participants experience of academic conferences to the community and thereby aim at simulating research on virtual conferences.
+With this, we aim to provide a tool for assessing the participants experience of academic conferences to the community and thereby aim at stimulating research on virtual conferences.
 
 \section{Questionnaire Design}
-We propose two questionnaires to investigate the participants expectations and experiences.
-The first questionnaire is called \textit{pre-conference questionnaire} and should be distributed before the virtual conference takes place.
-The second questionnaire is called \textit{post-conference questionnaire} and should be administered directly after the virtual conference.
+We propose two self-report questionnaires to investigate the participants expectations and experiences.
+The first questionnaire is called \textit{Pre-Conference Questionnaire} and should be distributed before the virtual conference takes place.
+The second questionnaire is called \textit{Post-Conference Questionnaire} and should be administered directly after the virtual conference.
 
-\afblock{Pre-Conference Questionnaire.}
-The aim of this first questionnaire is to assess participant demographics, timezone, and primarily to gather data on goals of participation, the planned participation, and prior experience with virtual conferences.
+\subsection{Pre-Conference Questionnaire}
+The aim of this first questionnaire is to assess participant demographics, timezone, and primarily to gather data on participants' goals and expectations, the planned participation, and prior experience with virtual conferences.
 It needs to be sent to all participants prior to the conference start.
-We assume that the virtual conference is a replacement for an on-site conference and we want also to understand the expectations of participants who attended prior conferences.
 
-The pre-conference questionnaire consisted of four sections.
-First, we collected the participant's time zone, the professional seniority, and if participants already attended prior versions of this conference.
-Subsequently, we assess the participants goals regarding their participation either as on-site conference and also as  virtual conference.
-We assess the following goals: presenting their own work, following other researchers work, and also social interaction.
-Social interaction is split into meeting already known researchers and meeting new researchers.
-Also, we assess how participants plan to their conference participation, e.g., which tools they plan to use and which sessions they plan to attend.
-These information can inform conference organizers before the start of the venue.
-Since our goal is to compare the virtual conference experience to on-site venues, we asked the participants to provide the same information but in the context of attending on-site conferences.
-This way, the questionnaire is a self-report study.
-We remark that self-report studies are an often used tool (e.g., in health and psychology research), yet the accuracy and reliability of reports of one's own behavior is unknown and thus self-report studies can have validity problems.
+Currently, we assume that a virtual conference is a replacement for an on-site conference, and we want also to understand the expectations of participants who attended prior conferences.
+However, the Pre-Conference Questionnaire can also be easily adapted to focus on virtual conference attendance only (and thus excluding the focus on on-site attendance).
 
-The pre-conference questionnaire is shown in Appendix~\ref{sec:preconf}.
+The Pre-Conference questionnaire consists of five sections.
+First, it collects a number of personal attributes of the responding virtual conference attendees, including gender, whether the participant already attended prior editions of the conference, the participant's time zone, the anticipated participation location, the professional seniority of the attendee, and whether the respondent has previously attended a remote/virtual conference.
+These inputs enable to partition the results in the analysis (e.g., experience of first time attendees vs.\ long time participants of the surveyed conference, or students vs.\ faculty members).
+Subsequently, it aims to collect information regarding participants' planned participation: which virtual participation facilities they are planning to attend, to which extent they plan to participate in the entire event or only parts, which specific sessions of the conference they are planning to attend and how they self-assess their anticipated participation compared to if the conference would have been on-site.
+Part of this information can be useful for the conference organizers ahead of the event.
+Thereupon, the questionnaire focuses on participants' goals when attending the conference.
+Since the goal is to be able to compare the virtual conference experience to on-site venues, participants are asked to indicate what they find important both in the context of attending an on-site conference (part three) and a virtual conference (part four).
+More concretely, we assess the following goals in terms of their importance: presenting own work, following other researchers' work (paper/poster presentations), interacting with researchers they already know, meeting new researchers, visiting the city/country in which the conference is held (in case of on-site), and social interaction (e.g., attending the social event).
+The fifth and last part of the Pre-Conference Questionnaire first of all focuses on participants' expectations concerning the virtual conference attendance, relative to attending the conference on-site (using a scale from much worse to much better).
+More specifically, for aspects such as: being able to focus on the scientific talks without distractions, the ability to ask questions after a talk, the possibilities for deep discussions, the interactions with new researchers, respondents are asked to indicate to which extent they expect these to be worse or better, compared to on-site attendance.
+We further to report on their \emph{expectations} with respect to potential technical problems and have the possibility to provide additional input at the end.
 
-\afblock{Post-Conference Questionnaire.}
-The post-conference questionnaire assesses the actual experience---instead of the planned behavior and goals---after conference attendance.
-It thus needs to be answered by participants after the conference ended, e.g., sent by the general chairs right after the closing ceremony.
-It assesses the participants' experience of attending the conference by collecting the following data:
+The pre-conference questionnaire is available at~\cite{VirtualConferencesGithub}.
+
+\subsection{Post-Conference Questionnaire}
+The post-conference questionnaire assesses the actual experience \emph{after} conference attendance.
+It complements the Pre-Conference Questionnaire that captures \emph{expectations} prior to the event. 
+To minimize recall bias, it should ideally be answered by participants right after the conference ended, e.g., should be sent by the general chairs right after the closing ceremony.
+Both questionnaires are in principle answered anonymously.
+An alternative implementation of our approach can assign pseudonyms (e.g., tokens) to participants that enable both questionnaires to be correlated at the individual level.
+However, in that case common regulations related to personal data protection may apply and participant consent may need to be obtained.
+
+The questionnaire assesses the participants' experience by collecting the following data:
 \begin{inparaenum}[\it i)]
-    \item Participant information (same as pre-conference questionnaire).
-    \item Overall experience of attending presentation sessions.
-    \item Presentation-related interactions.
-    \item Social interactions (Virtual Hallway Track).
-    \item Overall experience and fulfilment of expectations.
+    \item Participant information, which is the same as pre-conference questionnaire to enable correlations, extended with few additional questions.
+    \item Overall experience of attending the virtual conference and fulfillment of expectations.
+    \item The scientific talks and interaction during sessions.
+    \item Social interactions beyond the paper sessions (Virtual Hallway Track).
     \item General comments about virtual attendance and suggestions for future virtual conferences.
 \end{inparaenum}
 
-We assume that both questionnaires are answered anonymously to increase the response rate.
-We thus assess the same participant information in both the pre- and the post-conference questionnaire.
-An alternative implementation of our approach can assign pseudonyms (e.g., tokens) to participants that enable both questionnaires to be correlated.
-We opted for a simpler design and did not use pseudonyms since the correlation of both questionnaires was not subject to our intended analysis.
-Yet, the responses to both the participant information parts in both questionnaires can be compared statistically to check if the populations that answered the questionnaires are statistically similar.
+\afblock{Demographic Information.}
+The first part of the Post-Conference Questionnaire aims to gather general information about the respondents and their participation in the conference.
+In addition to the personal characteristics also included in the Pre-Conference Questionnaire (e.g., timezone, seniority level, gender, attendance of previous editions of QoMEX/virtual conferences), respondents are asked whether they presented a paper or not, which types of sessions they attended, from where and in which social context they participated in the conference and to which extent their planned vs. actual participation are aligned (with a possibility to elaborate in case of a discrepancy).
+To finalize this section, respondents are asked whether they would have attended the conference on-site (if that would have been a possibility) and to which extent this might have changed their participation.
 
-The overall experience assessed overall quality on a continuous 7-point scale defined in~\cite{itu-t_recommendation_p.851_subjective_2003}---an approach that is often used in \ac{QoE} research.
-This scale is an extension of a discrete ACR 5-point scale that is recommended by the ITU-T in Rec.\ P.800 (bad to excellent) in which the two extrema need to be displayed differently since they are supposed not be directly selected (see the implementation in TheFragebogen~\cite{TheFragebogen}).
-If such a display is not available, the overall quality should be assessed using the 5-point scale.
-This section of the questionnaire further assesses to which degree the expectations described in the pre-conference questionnaire and those on the virtual conference were met.
-Therefore, the fulfillment of the participants expectations is collected on the same dimensions as in the pre-conference questionnaire.
-It also asks if one would want to attend more conferences if they are offered online.
+\afblock{Overall Experience.}
+The second part of the questionnaire aims to assess participants' overall virtual conference experience and relative to their expectations.
+First, they are asked to report on their experience of engaging with the virtual conference platform.
+For this purpose, the short version of the User Engagement Scale (UES-SF)\cite{o2018practical} was adapted to fit the virtual conference experience.
+The UES-SF is a validated and shorter version of the original User Engagement Scale and measures four engagement dimensions: focused attention, perceived usability, aesthetic appeal and reward. Each dimension is measured by three items (using a 5-point scale from strongly disagree to strongly agree), resulting in a total of 12 items. 
+Thereupon, respondents are asked to rate their overall experience of attending the virtual conference on a 5-point absolute category rating (ACR) scale as recommended by ITU-T in Rec.\ P.800 (bad to excellent).
+This section of the questionnaire further assesses respondents' evaluation of their experience relative to their prior expectations (on a 5-point scale ranging from much worse to much better) in terms of e.g., the ability to present work, to follow presentations, to interact with speakers and other participants.
+Finally, respondents are asked to which extent they experienced technical problems (audio / video impairments, problems to join a session) and their potential cause (e.g., network-connection related problems).
+This section is concluded by an open question allowing respondents to elaborate on how technical challenges they may have experiences affected their experience.
+These questions enable investigating if technical issues were present that might can have caused a lower conference experience.
 
-The next section assesses the attendance of talk sessions.
-It assesses which tools were used and how well they worked and how the talk sessions compare to on-site versions of the conference (or other conferences).
-The latter dimensions are assessed on a 5-point Likert scale (much worse to much better).
-We assume that participants have attended at least one on-site conference prior to the assessed virtual conference (thus prior experience is assessed in the participant information). 
-In includes optional textual input on the pros and cons of the use of pre-recorded talks---a format used by virtual conferences to mitigate technical problems during live streams.
-Last, it asked how many sessions were skipped due to time zone difference---a main challenge that virtual conference face when providing live streams to a global audience.
+\afblock{Technical Session Experience.}
+The third part of the Post-Conference Questionnaire focuses on how the virtual scientific sessions and interaction with presenters / attendees were experienced.
+First, respondents are asked to evaluate a range of characteristics and affordances of the virtual conference relative to an on-site conference attendance.
+This question includes items such as "the possibility to ask questions after the talks", "the social interaction with researchers I already knew from before", "the presentation format" and repeats 7 statements from the expectation-part (Question 16) from the Pre-Conference Questionnaire. 
+This part further includes questions related to participants focus and attention, the presentation format and how this was perceived.
+For the latter, there was again a possibility to elaborate on the provided responses by means of free text.
+Finally, respondents are asked about their participation (mostly active vs. mostly passive) in the virtual discussion channels and number of virtual interactions using the different tools (again, with a possibility to elaborate on these in an open text field).
 
-We assess the interaction in two sections: \emph{i)} presentation-related interactions and \emph{ii)} social Interactions (Virtual Hallway Track).
-The interaction quality is assessed on a 5-point Likert scale (much worse to much better)---the same as in the previous session to keep the overall number of scales minimal.
-It is again asked relative to classical on-site conferences to assess the benefit / drawback of virtual conferences.
-Again, both sections contain optional textual input fields to assess the respective positive and negative aspects of interactions and ways for improvement.
+\afblock{Virtual Hallway Track.}
+The fourth section of the Post-Conference Questionnaire zooms in on the virtual hallway track, i.e., the possibilities for social interactions beyond the paper sessions: which of the provided platforms were used for social interaction and how is the quality of interactions with both known and previously unknown participants evaluated compared to a classical on-site conference?
+Again, this section contains optional textual input fields to assess the respective positive and negative/missed aspects of interactions and ways for improvement.
 
-%
-%
-%
-
-The last section (general comments about remote attendance) asked for general feedback (textual input) and the experience with the virtual conference format.
-The virtual conference format is assessed using the following scales.
-First, the agreement to the statement to attend more virtual conferences in the future.
-Second, the share of virtual conferences in the future (from 0\%---all in-person---to 100\%---all virtual).
-Third, the \ac{NPS} to investigate the impact on customer loyalty \cite{reichheld_one_2003}.
+\afblock{Current and Future Virtual Conference Attendance.}
+Finally, the fifth and last section of the Post-Conference Questionnaire addresses virtual conference attendance in general and from a future-oriented focus.
+Respondents are first asked to indicate the ideal share of virtual conferences in the future (from 0\%---all in-person---to 100\%---all virtual).
+Next, they are asked to express their (dis)agreement with a number of statements aiming to uncover attitudes related to virtual vs.\ online conference attendance.
+It includes nine statements such as "Virtual conferences should become the norm in the future", "On-site conference attendance is more enjoyable than virtual conference attendance" and "The advantages of attending a virtual conference outweigh the disadvantages".
+Following the attitude-related items, respondents are asked to indicate their preferred conference attendance mode.
+Finally, the \ac{NPS} is used to investigate the impact on customer loyalty \cite{reichheld_one_2003}.
 The \ac{NPS} asks how likely it would be that attending this virtual conference would be recommended to colleagues (0 \emph{not likely at all} until 10 \emph{extremely likely}).
 While it is of questionable reliability~\cite{npscritism} and not well-established the \ac{QoE} domain, it is popular in marketing and user retention analyses.
+To round of the Post-Conference Questionnaire, respondents get a final possibility to share what they experienced as most positive/negative and to provide any other comments they may have.
 
-The post-conference questionnaire is shown in Appendix~\ref{sec:postconf}.
-We provide a HTML version implemented using TheFragebogen~\cite{TheFragebogen} at \cite{VirtualConferencesGithub} to ease its direct application to further conferences.
-Parts of the questionnaire (e.g., on the used tools) need to be adapted to the assessed conference before use.
+The post-conference questionnaire available at~\cite{VirtualConferencesGithub}.
+
+\section{Application}
+We release the questionnaire as well as evaluation scripts at \cite{VirtualConferencesGithub}.
+To ease adoption, we provide a HTML version implemented using TheFragebogen~\cite{TheFragebogen} at \cite{VirtualConferencesGithub} to ease its direct application to further conferences.
+Parts of the questionnaire (e.g., on the used tools) need to be adapted to the conference.
+
+Our application at PAM~2020~\cite{pamexperience} showed that the dissemination of technical content (talks and discussions) is perceived to work better compared to on-site.
+Yet, the lacking social interaction was found to be a major shortcoming.
+
+\section{Conclusion}
+The participant experience of virtual conferences is not yet fully understood---a crucial aspect determining the long-term success of virtual conferences.
+To understand this aspect, we designed a questionnaire to assess the participants experience.
+Our approach evolved by being used at five venues to investigate the participant experience.
+By openly releasing it, we aim to foster data-driven research on how to improve the design and thereby the participants experience of virtual conferences.
 
 \balance
 
 \clearpage
 \bibliographystyle{acm}
 \bibliography{references}
-
-\begin{appendix}
-\clearpage
-%
-\section{Pre-Conference Questionnaire}
-\label{sec:preconf}
-
-\newcounter{preConfCounter}
-
-Remote conference attendance is a new experience for all of us and this is the very first time that \confname is held as a virtual conference. To understand your expectations and to optimize virtual conferences in the future, we would like to ask you to complete this questionnaire as part of research on virtual conference attendance. It is complemented by a post-conference questionnaire to assess your conference experience that we will sent after the conference. We appreciate and value your effort in helping with this research. The goal is to derive community guidelines for virtual conferences. With your answers, you will help to shape future conferences!
-
-This questionnaire consists of 5 blocks and will take you about 10 minutes to complete:
-1) Personal details
-2) Intended participation
-3) Your goals when attending a on-site conference (e.g., prior editions of \confname)
-4) Your goals when attending \confname as virtual conference
-5) Other comments (optional)
-
-All answers are collected anonymously. We thank you for your input!
-
-\subsection{Personal details}
-We first would like to learn few personal details about you to be able to better interpret your answers in this questionnaire.
-
-\begin{enumerate}
-
-	\item How many \confname conferences have you attended, including this one?
-		\begin{Qlist}
-			\item 1
-			\item 2
-			\item 3
-			\item 4--6
-			\item $>6$
-		\end{Qlist}
-
-	\item In which timezone are you?
-		\begin{Qlist}
-			\item (GMT -12:00) Eniwetok, Kwajalein
-			\item (GMT -11:00) Midway Island, Samoa
-			\item (GMT -10:00) Hawaii
-			\item (GMT -9:00) Alaska
-			\item (GMT -8:00) Pacific Time (US \& Canada)
-			\item (GMT -7:00) Mountain Time (US \& Canada)
-			\item (GMT -6:00) Central Time (US \& Canada), Mexico City
-			\item (GMT -5:00) Eastern Time (US \& Canada), Bogota, Lima
-			\item (GMT -4:00) Atlantic Time (Canada), Caracas, La Paz
-			\item (GMT -3:30) Newfoundland
-			\item (GMT -3:00) Brazil, Buenos Aires, Georgetown
-			\item (GMT -2:00) Mid-Atlantic
-			\item (GMT -1:00) Azores, Cape Verde Islands
-			\item (GMT) Western Europe Time, London, Lisbon, Casablanca
-			\item (GMT +1:00) Brussels, Copenhagen, Madrid, Paris
-			\item (GMT +2:00) Kaliningrad, South Africa
-			\item (GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg
-			\item (GMT +3:30) Tehran
-			\item (GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi
-			\item (GMT +4:30) Kabul
-			\item (GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent
-			\item (GMT +5:30) Bombay, Calcutta, Madras, New Delhi
-			\item (GMT +6:00) Almaty, Dhaka, Colombo
-			\item (GMT +7:00) Bangkok, Hanoi, Jakarta
-			\item (GMT +8:00) Beijing, Perth, Singapore, Hong Kong
-			\item (GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk
-			\item (GMT +9:30) Adelaide, Darwin
-			\item (GMT +10:00) Eastern Australia, Guam, Vladivostok
-			\item (GMT +11:00) Magadan, Solomon Islands, New Caledonia
-			\item (GMT +12:00) Auckland, Wellington, Fiji, Kamchatka
-		\end{Qlist}
-
-	\item From where are you participating in \confname?
-		\begin{Qlist}
-			\item Office / workplace
-			\item Home
-			\item Commuting
-			\item Co-working space
-			\item Other \Qline{3cm}
-		\end{Qlist}
-
-	\item Please rate your professional seniority
-		\begin{Qlist}
-			\item Undergrad / Master student
-			\item PhD student
-			\item Postdoc
-			\item Faculty
-			\item Industry
-			\item Other \Qline{3cm}
-		\end{Qlist}
-
-	\item Have you attended a remote conference before?
-		\begin{Qlist}
-			\item No, this is my first remote conference
-			\item Yes
-		\end{Qlist}
-
-	\item Would you have attended \confname as on-site conference in \confloc?
-		\begin{Qlist}
-			\item Yes, I would have physically attended \confname in \confloc
-			\item No, I am only attending because of the remote participation and would not have come to \confloc
-		\end{Qlist}
-
-\setcounter{preConfCounter}{\value{enumi}}
-\end{enumerate}
-
-\subsection{Planned participation}
-How do you plan to participate in the \confname virtual conference?
-
-\begin{enumerate}
-\setcounter{enumi}{\value{preConfCounter}}
-	\item Do you intend to use the conference Slack/Zoom as virtual hallway track?
-		\begin{Qlist}
-			\item Yes
-			\item No
-			\item I have not decided yet
-		\end{Qlist}
-
-	\item In which sessions do you plan to participate?
-		\begin{Qlist}
-			\item Session 1 (replace with real name)
-			\item Session 2 (replace with real name)
-			\item $\cdots$
-		\end{Qlist}
-
-	\item Do you think you would attend more sessions if you would have attended \confname as on-site venue?
-		\begin{Qlist}
-			\item Yes, I would have attended more
-			\item No
-		\end{Qlist}
-\setcounter{preConfCounter}{\value{enumi}}
-\end{enumerate}
-
-\clearpage
-\subsection{Your goals when attending a on-site conference (e.g., prior editions of \confname)}
-To begin with, please tell us about your goals when attending an on-site conference in person (such as \confname in the previous years). We will ask you to your goals when attending \confname as online conference in the next section.
-
-\begin{enumerate}
-\setcounter{enumi}{\value{preConfCounter}}
-	\item Importance of presenting my work to this community
-		\begin{tabular}{p{2cm}p{.8cm}p{.9cm}p{.9cm}p{.9cm}p{.9cm}}
-			& Not at all & Slightly & Moderate & Very & Extremely\\
-			 
-			Importance of presenting my work to this community & \QO & \QO & \QO & \QO & \QO \\
-\hline
-			Importance of following paper/poster presentations & \QO & \QO & \QO & \QO & \QO \\
-\hline
-			Importance of interacting with other researchers I already know & \QO & \QO & \QO & \QO & \QO \\
-\hline
-			Importance of meeting new researchers & \QO & \QO & \QO & \QO & \QO \\
-\hline
-			Importance of visiting the city/country in which the conference is held & \QO & \QO & \QO & \QO & \QO \\
-		\end{tabular}
-\setcounter{preConfCounter}{\value{enumi}}
-\end{enumerate}
-
-\subsection{Your goals when attending \confname as virtual conference}
-What are you goals when attending this virtual edition of \confname?
-
-\begin{enumerate}
-\setcounter{enumi}{\value{preConfCounter}}
-	\item Importance of presenting my work to this community
-		\begin{tabular}{p{2cm}p{.8cm}p{.9cm}p{.9cm}p{.9cm}p{.9cm}}
-			& Not at all & Slightly & Moderate & Very & Extremely\\
-			 
-			Importance of presenting my work to this community & \QO & \QO & \QO & \QO & \QO \\
-\hline
-			Importance of following paper/poster presentations & \QO & \QO & \QO & \QO & \QO \\
-\hline
-			Importance of interacting with other researchers I already know & \QO & \QO & \QO & \QO & \QO \\
-\hline
-			Importance of meeting new researchers & \QO & \QO & \QO & \QO & \QO \\
-		\end{tabular}
-\setcounter{preConfCounter}{\value{enumi}}
-\end{enumerate}
-
-
-\subsection{Other comments (optional)}
-\begin{enumerate}
-\setcounter{enumi}{\value{preConfCounter}}
-	\item Do you have other feedback / wishes / comments that you would like to share?
-		\Qlines{3}
-\end{enumerate}
- \clearpage
-%
-\section{Post-Conference Questionnaire}
-\label{sec:postconf}
-
-\newcounter{postConfCounter}
-
-Thank you for participating in \confname! Since this was the very first time that \confname was held as virtual conference, we are interested in how you experienced \confname in the broader context of research on virtual conferences. We therefore kindly ask you to participate in this post- conference questionnaire.
-
-This questionnaire consists of 6 blocks and will take you about 15-20 minutes to complete: 1) Personal details (as in the pre-conf questionnaire since we cannot correlate both due to anonymity)
-2) Overall Experience
-3) Talk Sessions
-4) Presentation-related Interactions
-5) Social Interactions (Virtual Hallway Track)
-6) General comments about virtual attendance
-
-All answers are collected anonymously and we will share the results with you afterwards. We thank you for your input.
-
-\subsection{Personal details}
-We first would like to learn few personal details about you to be able to better interpret your answers in this questionnaire.
-
-\begin{enumerate}
-
-	\item How many \confname conferences have you attended, including this one?
-		\begin{Qlist}
-			\item 1
-			\item 2
-			\item 3
-			\item 4--6
-			\item $>6$
-		\end{Qlist}
-
-	\item In which timezone are you?
-		\begin{Qlist}
-			\item (GMT -12:00) Eniwetok, Kwajalein
-			\item (GMT -11:00) Midway Island, Samoa
-			\item (GMT -10:00) Hawaii
-			\item (GMT -9:00) Alaska
-			\item (GMT -8:00) Pacific Time (US \& Canada)
-			\item (GMT -7:00) Mountain Time (US \& Canada)
-			\item (GMT -6:00) Central Time (US \& Canada), Mexico City
-			\item (GMT -5:00) Eastern Time (US \& Canada), Bogota, Lima
-			\item (GMT -4:00) Atlantic Time (Canada), Caracas, La Paz
-			\item (GMT -3:30) Newfoundland
-			\item (GMT -3:00) Brazil, Buenos Aires, Georgetown
-			\item (GMT -2:00) Mid-Atlantic
-			\item (GMT -1:00) Azores, Cape Verde Islands
-			\item (GMT) Western Europe Time, London, Lisbon, Casablanca
-			\item (GMT +1:00) Brussels, Copenhagen, Madrid, Paris
-			\item (GMT +2:00) Kaliningrad, South Africa
-			\item (GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg
-			\item (GMT +3:30) Tehran
-			\item (GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi
-			\item (GMT +4:30) Kabul
-			\item (GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent
-			\item (GMT +5:30) Bombay, Calcutta, Madras, New Delhi
-			\item (GMT +6:00) Almaty, Dhaka, Colombo
-			\item (GMT +7:00) Bangkok, Hanoi, Jakarta
-			\item (GMT +8:00) Beijing, Perth, Singapore, Hong Kong
-			\item (GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk
-			\item (GMT +9:30) Adelaide, Darwin
-			\item (GMT +10:00) Eastern Australia, Guam, Vladivostok
-			\item (GMT +11:00) Magadan, Solomon Islands, New Caledonia
-			\item (GMT +12:00) Auckland, Wellington, Fiji, Kamchatka
-		\end{Qlist}
-
-	\item From where are you participating in \confname?
-		\begin{Qlist}
-			\item Office / workplace
-			\item Home
-			\item Commuting
-			\item Co-working space
-			\item Other \Qline{3cm}
-		\end{Qlist}
-
-	\item Please rate your professional seniority
-		\begin{Qlist}
-			\item Undergrad / Master student
-			\item PhD student
-			\item Postdoc
-			\item Faculty
-			\item Industry
-			\item Other \Qline{3cm}
-		\end{Qlist}
-
-	\item Have you attended a remote conference before?
-		\begin{Qlist}
-			\item No, this is my first remote conference
-			\item Yes
-		\end{Qlist}
-
-	\item Would you have attended \confname as on-site conference in \confloc?
-		\begin{Qlist}
-			\item Yes, I would have physically attended \confname in \confloc
-			\item No, I am only attending because of the remote participation and would not have come to Oregon
-		\end{Qlist}
-
-\setcounter{postConfCounter}{\value{enumi}}
-\end{enumerate}
-
-
-\subsection{Overall Experience}
-This block is about assessing your overall experience of attending \confname as virtual conference. Did you enjoy it?
-
-\begin{enumerate}
-\setcounter{enumi}{\value{postConfCounter}}
-
-	\item My overall experience of attending remotely \confname is
-		\begin{Qlist}
-			\item extremely bad
-			\item bad
-			\item poor
-			\item fair
-			\item good
-			\item excellent
-			\item ideal
-		\end{Qlist}
-
-	\item Compared to attending on-site, attending remotely allowed me to better focus on the conference
-
-		\begin{tabular}{p{2cm}p{.8cm}p{.9cm}p{.9cm}p{.9cm}p{.9cm}}
-			\hline
-			& Strongly Disagree & Disagree & Undecided & Agree & Strongly Agree\\
-			 
-			I was more focused on the technical content & \QO & \QO & \QO & \QO & \QO \\
-		\end{tabular}
-
-
-	\item My expectations on attending a virtual conference were met 
-
-		\begin{tabular}{p{2cm}p{1.5cm}p{1.5cm}p{1.5cm}}
-			\hline
-			& Better than expected & As expected & Less than expected\\
-			The possibility to \emph{follow presentations} was & \QO & \QO & \QO\\
-			\hline
-			The possibility to \emph{interact with speakers} was & \QO & \QO & \QO\\
-			\hline
-			The possibility to \emph{interact with participants} was  & \QO & \QO & \QO\\
-		\end{tabular}
-
-	\item (Optional) To speakers: My expectations on attending a virtual conference were met
-
-		\begin{tabular}{p{2cm}p{1.5cm}p{1.5cm}p{1.5cm}}
-			\hline
-			& Better than expected & As expected & Less than expected\\
-			The possibility to \emph{present my work} was & \QO & \QO & \QO\\
-		\end{tabular}
-
-	\item Would you attend more conferences each year if they are offered online
-		\begin{Qlist}
-			\item Yes
-			\item Maybe
-			\item No
-			\item Other \Qline{3cm}
-		\end{Qlist}
-
-\setcounter{postConfCounter}{\value{enumi}}
-\end{enumerate}
-
-
-\subsection{Talk Sessions}
-In this section, we are interested how you experienced the talks sessions (i.e., paper and poster presentations).
-
-\begin{enumerate}
-\setcounter{enumi}{\value{postConfCounter}}
-
-	\item What tools did you use to participate in the conference and how well did they work?
-		\begin{tabular}{p{2cm}p{1cm}p{1cm}p{1cm}p{1cm}}
-			\hline
-			& Better than expected & As expected & Less than expected & Did not use\\
-			Zoom & \QO & \QO & \QO & \QO\\
-			\hline
-			Slack & \QO & \QO & \QO & \QO\\
-		\end{tabular}
-
-	\item How do you rate the presentation sessions of this virtual conference compared to on-site conferences?
-		\begin{tabular}{p{2cm}p{.8cm}p{.8cm}p{.8cm}p{.8cm}p{.8cm}}
-			\hline
-			& much worse & some\-what worse & stayed the same & some\-what better & much better\\
-			The ability to attend talks was & \QO & \QO & \QO & \QO & \QO \\
-			\hline
-			The ability to focus on the talks without distractions was & \QO & \QO & \QO & \QO & \QO \\
-			\hline
-			The ability to ask questions was &  \QO & \QO & \QO & \QO & \QO \\
-			\hline
-			The ability to deeply discuss a topic openly with all participants was &  \QO & \QO & \QO & \QO & \QO \\
-		\end{tabular}
-
-	\item (optional) Pros: What did you like about pre-recorded talks?
-		\Qlines{3}
-
-	\item (optional) Cons: What did you not like about pre-recorded talks?
-		\Qlines{3}
-
-	\item How many paper sessions did you skip due to time zone differences
-		\begin{Qlist}
-			\item 0 (I followed every session)
-			\item 1
-			\item 2
-			\item 3 (I skipped all sessions)
-		\end{Qlist}
-
-\setcounter{postConfCounter}{\value{enumi}}
-\end{enumerate}
-
-
-\subsection{Presentation-related Interactions}
-This section is about how you interacted with other participants about the content presented at the conference in terms of papers and posters.
-
-\begin{enumerate}
-\setcounter{enumi}{\value{postConfCounter}}
-
-	\item Did you participate in technical discussions on Slack or Zoom? 
-		\begin{Qlist}
-			\item Actively (I posted content to Slack or Zoom)
-			\item Passively (I read what others posted)
-			\item Other \Qline{3cm}
-		\end{Qlist}
-
-	\item How do you rate the interaction with others during this virtual conference compared to on-site conferences?
-		\begin{tabular}{p{2cm}p{.8cm}p{.8cm}p{.8cm}p{.8cm}p{.8cm}}
-			\hline
-			& much worse & some\-what worse & stayed the same & some\-what better & much better\\
-			The ability to ask questions was & \QO & \QO & \QO & \QO & \QO \\
-			\hline
-			The moderation of questions by the session chairs when posting to the Zoom chat was & \QO & \QO & \QO & \QO & \QO \\
-			\hline
-			The ability for detailed technical discussions was &  \QO & \QO & \QO & \QO & \QO \\
-		\end{tabular}
-
-	\item (optional): Pros: Other feedback on \emph{positive} aspects of the ability to interact during this virtual conference
-		\Qlines{3}
-
-	\item (optional): Cons: Other feedback on \emph{negative} aspects of the ability to interact during this virtual conference
-		\Qlines{3}
-
-\setcounter{postConfCounter}{\value{enumi}}
-\end{enumerate}
-
-\clearpage
-\subsection{Social Interactions (Virtual Hallway Track)}
-Besides content related to technical presentations (papers / posters), conferences are about general interactions with known and new researchers (e.g., during breaks or at the dinner table): the hallway track. We are interested in this section how you experienced the hallway track at \confname.
-
-\begin{enumerate}
-\setcounter{enumi}{\value{postConfCounter}}
-
-	\item Did you use Slack or the Zoom chat to interact with others about topics unrelated to the presentations?
-		\begin{Qlist}
-			\item Yes
-			\item No
-		\end{Qlist}
-
-	\item How do you rate the quality of social interactions (unrelated to the presentations) during this virtual conference compared to classical on-site conferences?
-
-		\begin{tabular}{p{2cm}p{.8cm}p{.8cm}p{.8cm}p{.8cm}p{.8cm}}
-			\hline
-			& much worse & some\-what worse & stayed the same & some\-what better & much better\\
-			The interactions with researchers I already know were & \QO & \QO & \QO & \QO & \QO \\
-			\hline
-			The interactions with new researchers I didn't know before were & \QO & \QO & \QO & \QO & \QO \\
-		\end{tabular}
-
-	\item (optional) What did you enjoy about social interaction at this virtual conference?
-		\Qlines{3}
-
-	\item (optional) How can social interactions be improved at virtual conferences?
-		\Qlines{3}
-
-\setcounter{postConfCounter}{\value{enumi}}
-\end{enumerate}
-
-
-\subsection{General comments about remote attendance}
-
-\begin{enumerate}
-\setcounter{enumi}{\value{postConfCounter}}
-
-	\item I would like to attend more virtual conferences in the future
-		\begin{Qlist}
-			\item Strongly Disagree
-			\item Disagree
-			\item Undecided
-			\item Agree
-			\item Strongly Agree
-		\end{Qlist}
-
-	\item How many venues should be virtual in the future?
-		\begin{Qlist}
-			\item 0\% (all in person, please)
-			\item 10\%
-			\item 20\%
-			\item 30\%
-			\item 40\%
-			\item 50\%
-			\item 60\%
-			\item 70\%
-			\item 80\%
-			\item 90\%
-			\item 100\% (all virtual, please)
-		\end{Qlist}
-
-	\item How likely is it that you would recommend attending \confname as virtual conference to a colleague?
-		\begin{Qlist}
-			\item 0 (not all all likely to recommend)
-			\item 1
-			\item 2
-			\item 3
-			\item 4
-			\item 5
-			\item 6
-			\item 7
-			\item 8
-			\item 9
-			\item 10 (extremely likely to recommend)
-		\end{Qlist}
-
-	\item Pros: What worked well about attending remotely
-		\Qlines{3}
-
-	\item Cons: What did not work well about attending remotely
-		\Qlines{3}
-
-	\item Other comments / suggestions / feedback
-		\Qlines{3}
-\setcounter{postConfCounter}{\value{enumi}}
-\end{enumerate}
- \end{appendix}
-
 
 \end{document}
