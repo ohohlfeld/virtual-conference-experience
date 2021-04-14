@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>Post-Conference Questionnaire</title>
+        <link rel="stylesheet" type="text/css" href="example.css">
+
+        <style>
+        .questionnaireItem {
+            width: 40em;
+            margin-left: auto;
+            margin-right: auto;
+
+            border-style: inset;
+            background-color: Snow;
+            padding: 0.5em;
+        }
+
+        *[class*='Required'] {
+            outline: none;
+            border-color: red;
+            box-shadow: 0 0 1em red;
+        }
+
+        .screenPreview table {
+            width: 100%;
+            border-collapse: collapse;
+            word-break: break-all;
+        }
+
+        .screenPreview table td,
+        .screenPreview table th {
+            font-size: 1em;
+            border: 1px solid #98bf21;
+            padding: 3px 7px 2px 7px;
+        }
+
+        .screenPreview table th {
+            font-size: 1.1em;
+            text-align: left;
+            padding-top: 5px;
+            padding-bottom: 4px;
+            background-color: #A7C942;
+            color: #ffffff;
+        }
+
+        .screenPreview table tr.alt td {
+            color: #000000;
+            background-color: #EAF2D3;
+        }
+
+        .iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+
+            margin: 0;
+            padding: 0;
+
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+
+            overflow: hidden;
+        }
+
+        </style>
+
+        <script src="thefragebogen.js"></script>
+
+        <script>
+        var screens = [];
+
+        var screen1 = new ScreenUIElements(
+            new UIElementHTML(undefined, "<h1>Post-Conference Questionnaire</h1>"),
+            new UIElementHTML(undefined, `This questionnaire consists of 5 blocks and will take you about 15-20 minutes to complete:
+<ol>
+    <li>Personal details</li>
+    <li>Intented participation</li>
+    <li>Overall Experience</li>
+    <li>Scientific talks and interaction during sessions</li>
+    <li>Social Interactions beyond the paper sessions (Virtual Hallway Track)</li>
+    <li>General comments about virtual attendance</li>
+</ol>`),
+
+            new UIElementHTML(undefined, "<h1>Personal details</h1>"),
+            new UIElementHTML(undefined, `We first would like to learn few personal details about you to be able to better interpret
+your answers in this questionnaire.`),
+
+            new QuestionnaireItemDefinedSelector("questionnaireItem", "In which timezone are you?", true,
+                [
+                  "(GMT -12:00) Eniwetok, Kwajalein",
+                  "(GMT -11:00) Midway Island, Samoa",
+                  "(GMT -10:00) Hawaii",
+                  "(GMT -9:00) Alaska",
+                  "(GMT -8:00) Pacific Time (US & Canada)",
+                  "(GMT -7:00) Mountain Time (US & Canada)",
+                  "(GMT -6:00) Central Time (US & Canada), Mexico City",
+                  "(GMT -5:00) Eastern Time (US & Canada), Bogota, Lima",
+                  "(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz",
+                  "(GMT -3:30) Newfoundland",
+                  "(GMT -3:00) Brazil, Buenos Aires, Georgetown",
+                  "(GMT -2:00) Mid-Atlantic",
+                  "(GMT -1:00) Azores, Cape Verde Islands",
+                  "(GMT) Western Europe Time, London, Lisbon, Casablanca",
+                  "(GMT +1:00) Brussels, Copenhagen, Madrid, Paris",
+                  "(GMT +2:00) Kaliningrad, South Africa",
+                  "(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg",
+                  "(GMT +3:30) Tehran",
+                  "(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi",
+                  "(GMT +4:30) Kabul",
+                  "(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent",
+                  "(GMT +5:30) Bombay, Calcutta, Madras, New Delhi",
+                  "(GMT +6:00) Almaty, Dhaka, Colombo",
+                  "(GMT +7:00) Bangkok, Hanoi, Jakarta",
+                  "(GMT +8:00) Beijing, Perth, Singapore, Hong Kong",
+                  "(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk",
+                  "(GMT +9:30) Adelaide, Darwin",
+                  "(GMT +10:00) Eastern Australia, Guam, Vladivostok",
+                  "(GMT +11:00) Magadan, Solomon Islands, New Caledonia"
+                ]),
+
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Please rate your professional seniority", true, ["Undergrad / Master student", "PhD student", "Postdoc / Experienced researcher", "Faculty", "Industry"]),
+
+            new QuestionnaireItemDefinedOne("questionnaireItem", "What is your gender?", true, ["Female", "Male", "Non-binary", "Prefer not to say"]),
+
+            new QuestionnaireItemDefinedOne("questionnaireItem", "How many conferences have you attended, including this one? *", true, ["1", "2", "3", "4-6", ">6"]),
+
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Did you present a paper at the conference?", true, ["Yes (pre-recorded presentation)", "No"]),
+
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Which of the following types of sessions did you attend? I attended...", true,
+                [
+                    "One (or more) of the keynote talks",
+                    "One (or more) of the oral sessions (pre-recorded talks and live Q&A)",
+                    "One (or more) of the poster sessions in the virtual lobby (hubs)",
+                    "One (or more) of the long paper sessions in the virtual lobby (hubs)",
+                    "The virtual social/music session (Day 2 in the evening)"
+                ]),
+
+            new QuestionnaireItemDefinedOne("questionnaireItem", "From where did you participate in QoMEX?", true, ["Office / workplace", "Home", "Commuting", "Co-workgin space", "A combination of the above"]),
+
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Which of the following options best describes the social context* from which you participated? (*We hereby refer to the number of other people in your physical proximity, i.e., who you could see and/or hear).", true,
+                [
+                    "I was mostly alone - no others around",
+                    "There were 1-2 other people around most of the time",
+                    "There were 3-4 other people around most of the time" ,
+                    "There were more than 4 people around most of the time"
+                ]),
+
+            new QuestionnaireItemTextArea("questionnaireItem", "(Optional) If you did not participate in the virtual conference as you initially planned, why was this?"),
+
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Would you have attended QoMEX as on-site conference in Ireland?", true, ["Yes", "No", "I had not decided yet"]),
+
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Please indicate the most applicable option: If QoMEX would have been an on- site venue...", true,
+                [
+                    "I probably would have attended more sessions/ conference activities than I attended virtually",
+                    "I probably would have attended less sessions/activities than I attended virtually",
+                    "My level of participation would probably have been comparable" ,
+                    "I don't know"
+                ]),
+
+            new QuestionnaireItemTextArea("questionnaireItem", "(Optional) Please briefly explain your answer above, especially if you would have attended more or less sessions on-site."),
+
+
+            new UIElementHTML(undefined, "<h1>The following statements ask you to reflect on your experience of engaging with the virtual conference platform (i.e., through the YouTube livestream, Zoom, Mozilla Hubs, Slack). For each statement, please use the following scale to indicate what is most true for you.</h1>"),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I lost myself in the virtual conference experience", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "The virtual conference platform appealed to my senses", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Using the virtual conference platform was taxing", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I was absorbed in the virtual conference experience", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I felt interested in this virtual conference experience", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "The time I spent using the virtual conference platform just slipped away", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I found the virtual conference platform confusing to use", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "The virtual conference platform was attractive", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Using the virtual conference platform was worthwhile", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I felt frustrated while using the virtual conference platform", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "The virtual conference platform was aesthetically appealing", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+
+            new QuestionnaireItemDefinedMulti("questionnaireItem", "How would you rate your overall experience of attending this conference as a virtual conference? (on a 5-point scale from bad to excellent)", true, ["extremely bad", "bad", "poor", "fair", "good", "excellent", "ideal"]),
+
+            new UIElementHTML(undefined, "<h1>The following statements ask you to reflect on your experience of engaging with the virtual conference platform (i.e., through the YouTube livestream, Zoom, Mozilla Hubs, Slack). For each statement, please use the following scale to indicate what is most true for you.</h1>"),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "My overall experience compared to my prior expectations was...", true, ["Much worse", "Somewhat worse", "As expected", "Somewhat better", "Much better"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "The possibility <b>to present work</b> was...", true, ["Much worse", "Somewhat worse", "As expected", "Somewhat better", "Much better"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "The possibility <b>to follow presentations</b> was", true, ["Much worse", "Somewhat worse", "As expected", "Somewhat better", "Much better"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "The possibility <b>to interact with speakers</b> was...", true, ["Much worse", "Somewhat worse", "As expected", "Somewhat better", "Much better"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "The possibility <b>to interact with participants</b> was...", true, ["Much worse", "Somewhat worse", "As expected", "Somewhat better", "Much better"]),
+            new QuestionnaireItemTextArea("questionnaireItem", "(Optional) Please briefly explain your answer above: why was it worse / better or as you expected?"),
+
+            new UIElementHTML(undefined, "<h1>To which extent did you experience the following technical problems related to your participation in this virtual edition of this conference?</h1>"),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Audio impairments", true, ["Never", "Very rarely", "Rarely", "Occasionally", "Frequently", "Very frequently"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Video impairments", true, ["Never", "Very rarely", "Rarely", "Occasionally", "Frequently", "Very frequently"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Problems to join a session", true, ["Never", "Very rarely", "Rarely", "Occasionally", "Frequently", "Very frequently"]),
+
+            new UIElementHTML(undefined, "<h1>To which extent do you think that encountered technical problems were related to your home network connection?</h1>"),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Network connection-related problems", true, ["Never", "Very rarely", "Rarely", "Occasionally", "Frequently", "Very frequently"]),
+            new QuestionnaireItemTextArea("questionnaireItem", "(Optional) What were the main technical problems you experienced and how did they affect your experience?"),
+
+
+            new UIElementHTML(undefined, "<h1>Scientific talks and interaction during sessions</h1>"),
+            new UIElementHTML(undefined, "In this section, we are interested how you experienced the scientific sessions (i.e., paper and poster presentations) as well as the overall interaction with presenters and other attendees."),
+
+            new UIElementHTML(undefined, "<h1>Compared to attending QoMEX <b>on-site</b> (e.g., in previous years), how would you evaluate the following specific aspects for this virtual edition of this conference? (If you never attended this conference before, please use the last conference you physically attended as reference)."),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "The technical session format (full papers, pre-recorded presentations)", true, ["Much worse", "Somewhat worse", "The same / comparable", "Somewhat better", "Much better"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "The poster presentation format (pre-recorded short talks)", true, ["Much worse", "Somewhat worse", "The same / comparable", "Somewhat better", "Much better"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "The possibility to attend scientific talks", true, ["Much worse", "Somewhat worse", "The same / comparable", "Somewhat better", "Much better"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "My ability to focus on the talks without distractions", true, ["Much worse", "Somewhat worse", "The same / comparable", "Somewhat better", "Much better"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "The possibility to deeply discuss a topic openly with all participants", true, ["Much worse", "Somewhat worse", "The same / comparable", "Somewhat better", "Much better"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "The social interaction with researchers I already knew from before", true, ["Much worse", "Somewhat worse", "The same / comparable", "Somewhat better", "Much better"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "The social interaction with researchers I didn't know before", true, ["Much worse", "Somewhat worse", "The same / comparable", "Somewhat better", "Much better"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "The virtual social event", true, ["Much worse", "Somewhat worse", "The same / comparable", "Somewhat better", "Much better"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "The moderation of questions by the session chairs", true, ["Much worse", "Somewhat worse", "The same / comparable", "Somewhat better", "Much better"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "The possibility to ask detailed technical questions after a presentation", true, ["Much worse", "Somewhat worse", "The same / comparable", "Somewhat better", "Much better"]),
+
+            new UIElementHTML(undefined, "<h1>Please indicate what is most true for you, using the scale below. Compared to on-site conference attendance, ..."),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I was more focused on the technical content", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "was more focused on social interactions", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+
+            new UIElementHTML(undefined, "<h1>The following statements ask you to reflect on the pre-recorded talks presented at the conference. Please indicate what is most true for you (using the scale below ranging from 1. strongly disagree to 5. strongly agree)."),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Overall, the <b>sound</b> quality of the pre-recorded talks was high", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Overall, the <b>video</b> quality of the pre-recorded talks was high", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Overall, the pre-recorded talks were of better quality than live talks at an on-site conference", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Having a video of the speaker in the corner of slides helped me to stay focused", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemTextArea("questionnaireItem", "(Optional) What did you find positive / negative about the pre-recorded talks?"),
+
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Which of the following options best describes your participation in public technical discussions during the conference (e.g., on Slack, Slido, Zoom, Hubs)?", true,
+              [
+                "Mostly active participation (e.g., I posted content to Slack, Slido, ...)",
+                "Mostly passive participation (e.g., I read what others posted on Slack, Slido, ...)"
+              ]),
+
+            new UIElementHTML(undefined, "<h1>To get a better idea of how the different offered tools were used, please indicate below what fits best."),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Number of participants you interacted within <b>Slack private</b> chats (approximately)", true, ["0", "1-5", "6-10", ">10"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Number of participants you interact with in <b>Zoom private</b> chats (approximately)", true, ["0", "1-5", "6-10", ">10"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Number of questions you asked in Slido (approximately)", true, ["0", "1-5", "6-10", ">10"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Number of Hubs sessions you joined", true, ["0", "1-5", "6-10", ">10"]),
+            new QuestionnaireItemTextArea("questionnaireItem", "(Optional): What do you consider positive / negative about the possibilities to interact with other participants during the conference?"),
+
+
+            new UIElementHTML(undefined, "<h1>Social interactions beyond the paper sessions (Virtual Hallway Track)</h1>"),
+            new UIElementHTML(undefined, "Besides content related to technical presentations (papers / posters), conferences are about general interactions with known and new researchers (e.g., during breaks or at the dinner table): the hallway track. We are interested in this section how you experienced the virtual hallway track."),
+            new QuestionnaireItemDefinedMulti("questionnaireItem", "Do you expect any technical problems related to your participation in tis conference as an on-line conference? (multiple options are possible)", true,
+                [
+                  "Slack",
+                  "Zoom / Zoom chat",
+                  "Mozilla Hubs",
+                  "Other platform(s), e.g., Skype, Teams, Messenger, ...",
+                  "None of the above",
+                  "I did not interact with anyone about topics unrelated to the technical talks"
+                ]),
+
+            new UIElementHTML(undefined, "<h1>How do you rate the quality of social interactions (unrelated to the presentations) during this virtual conference compared to classical on-site conferences?"),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Interactions with participants I already knew", true, ["Much worse", "Somewhat worse", "The same / comparable", "Somewhat better", "Much better"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Interactions with participants I didn't know yet", true, ["Much worse", "Somewhat worse", "The same / comparable", "Somewhat better", "Much better"]),
+            new QuestionnaireItemTextArea("questionnaireItem", "(Optional) What did you enjoy and / or miss in terms of social interaction during this virtual conference?"),
+            new QuestionnaireItemTextArea("questionnaireItem", "(optional) Do you have any concrete suggestions on how to improve social interaction at virtual conferences?"),
+
+            new QuestionnaireItemDefinedSelector("questionnaireItem", "According to you, which proportion of the conferences that you typically attend or consider to attend should ideally be virtual in the future? ", true,
+                [
+                  "0% (all on-site)",
+                  "10%",
+                  "20%",
+                  "30%",
+                  "40%",
+                  "50%",
+                  "60%",
+                  "70%",
+                  "80%",
+                  "90%",
+                  "100% (all virtual)"
+                ]),
+
+            new UIElementHTML(undefined, "<h1>Below are a number of statements related to virtual vs. on-site conference attendance. For each statement, please use the following scale to indicate what is most true for you."),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I would like to attend more virtual conferences in the future", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I would prefer live talks over pre-recorded talks if I attend another virtual conference", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Virtual conference attendance is less tiring than on-site conference attendance", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Virtual conferences should preferably use only one platform for presentations, discussions and social interactions", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "The advantages of attending a virtual conference outweigh the disadvantages", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "On-site conference attendance is more enjoyable than virtual conference attendance", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Virtual conferences should become the norm in the future", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "The social dimension of an on-site conference cannot be replicated in a virtual conference setting", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I would like to attend more virtual conferences in the future", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "I would like to attend more virtual conferences in the future", true, ["Strongly Agree", "Agree", "Undecided", "Disagree", "Strongly Disagree"]),
+
+            new QuestionnaireItemDefinedOne("questionnaireItem", "If you can choose, what is your preferred conference attendance mode:", true,
+              [
+                "On-site conference attendance",
+                "Virtual conference attendance",
+                "It depends (e.g., conference size, location, format ...)",
+                "I don't know"
+              ]),
+
+            new QuestionnaireItemDefinedSelector("questionnaireItem", "How likely is it that you would recommend attending this conference as a virtual conference to a colleague?", true,
+              [
+                "0 (Not likely)",
+                "1",
+                "2",
+                "3",
+                "4",
+                "5",
+                "6",
+                "7",
+                "8",
+                "9",
+                "10 (Extremely likely)",
+              ]),
+
+            new QuestionnaireItemTextArea("questionnaireItem", "(Optional) In summary, what did you experience as most positive / negative about attending this conference virtually?"),
+
+            new QuestionnaireItemTextArea("questionnaireItem", "(Optional) If you have any other comments / suggestions / feedback, feel free to share them here"),
+        );
+        screens.push(screen1);
+
+        //Most important: create the ScreenController
+        var screenController = new ScreenController(screens);
+
+        </script>
+
+        <script>
+        //Having the start()-function in an extra script-tag makes sure that it will be executed even if there are errors in the script-tag configuring TheFragebogen.
+        function start() {
+            document.body.innerHTML += "TheFragebogen loaded.";
+            if (typeof(screenController) === "undefined") {
+                document.body.innerHTML += "<br><i>Something went wrong:</i> Please check that thefragebogen.js was loaded and that the configuration is ok.";
+                return;
+            }
+            screenController.init(document.body);
+            screenController.start();
+        }
+
+        </script>
+    </head>
+
+    <body onload="start()">
+        <p>
+            TheFragebogen will be shown here.<br> If something fails while starting, an error message will be shown here.
+        </p>
+    </body>
+
+</html>

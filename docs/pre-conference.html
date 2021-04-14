@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>Pre-Conference Questionnaire</title>
+        <link rel="stylesheet" type="text/css" href="example.css">
+
+        <style>
+        .questionnaireItem {
+            width: 40em;
+            margin-left: auto;
+            margin-right: auto;
+
+            border-style: inset;
+            background-color: Snow;
+            padding: 0.5em;
+        }
+
+        *[class*='Required'] {
+            outline: none;
+            border-color: red;
+            box-shadow: 0 0 1em red;
+        }
+
+        .screenPreview table {
+            width: 100%;
+            border-collapse: collapse;
+            word-break: break-all;
+        }
+
+        .screenPreview table td,
+        .screenPreview table th {
+            font-size: 1em;
+            border: 1px solid #98bf21;
+            padding: 3px 7px 2px 7px;
+        }
+
+        .screenPreview table th {
+            font-size: 1.1em;
+            text-align: left;
+            padding-top: 5px;
+            padding-bottom: 4px;
+            background-color: #A7C942;
+            color: #ffffff;
+        }
+
+        .screenPreview table tr.alt td {
+            color: #000000;
+            background-color: #EAF2D3;
+        }
+
+        .iframe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+
+            margin: 0;
+            padding: 0;
+
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+
+            overflow: hidden;
+        }
+
+        </style>
+
+        <script src="thefragebogen.js"></script>
+
+        <script>
+        //This array stores all screens that will be shown.
+        var screens = [];
+
+        //The welcome screen of this questionnaire with some text and a standard question.
+        var screen1 = new ScreenUIElements(
+            new UIElementHTML(undefined, "<h1>Pre-Conference Questionnaire</h1>"),
+            new UIElementHTML(undefined, `This questionnaire consists of 6 blocks and will take you about 10 minutes to complete:
+<ol>
+    <li>Personal details</li>
+    <li>Intented participation</li>
+    <li>Talk Sessions</li>
+    <li>Your goals when attending a on-site conference</li>
+    <li>Your *expectations* when attending QoMEX as virtual conference</li>
+    <li>Other comments (optional)</li>
+</ol>`),
+
+            new UIElementHTML(undefined, "<h1>Personal details</h1>"),
+            new UIElementHTML(undefined, `We first would like to learn few personal details about you to be able to better interpret
+your answers in this questionnaire.`),
+
+            new QuestionnaireItemDefinedOne("questionnaireItem", "What is your gender?", true, ["Female", "Male", "Non-binary", "Prefer not to say"]),
+
+            new QuestionnaireItemDefinedOne("questionnaireItem", "How many conferences have you attended, including this one? *", true, ["1", "2", "3", "4-6", ">6"]),
+
+            new QuestionnaireItemDefinedSelector("questionnaireItem", "In which timezone are you?", true,
+                [
+                  "(GMT -12:00) Eniwetok, Kwajalein",
+                  "(GMT -11:00) Midway Island, Samoa",
+                  "(GMT -10:00) Hawaii",
+                  "(GMT -9:00) Alaska",
+                  "(GMT -8:00) Pacific Time (US & Canada)",
+                  "(GMT -7:00) Mountain Time (US & Canada)",
+                  "(GMT -6:00) Central Time (US & Canada), Mexico City",
+                  "(GMT -5:00) Eastern Time (US & Canada), Bogota, Lima",
+                  "(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz",
+                  "(GMT -3:30) Newfoundland",
+                  "(GMT -3:00) Brazil, Buenos Aires, Georgetown",
+                  "(GMT -2:00) Mid-Atlantic",
+                  "(GMT -1:00) Azores, Cape Verde Islands",
+                  "(GMT) Western Europe Time, London, Lisbon, Casablanca",
+                  "(GMT +1:00) Brussels, Copenhagen, Madrid, Paris",
+                  "(GMT +2:00) Kaliningrad, South Africa",
+                  "(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg",
+                  "(GMT +3:30) Tehran",
+                  "(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi",
+                  "(GMT +4:30) Kabul",
+                  "(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent",
+                  "(GMT +5:30) Bombay, Calcutta, Madras, New Delhi",
+                  "(GMT +6:00) Almaty, Dhaka, Colombo",
+                  "(GMT +7:00) Bangkok, Hanoi, Jakarta",
+                  "(GMT +8:00) Beijing, Perth, Singapore, Hong Kong",
+                  "(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk",
+                  "(GMT +9:30) Adelaide, Darwin",
+                  "(GMT +10:00) Eastern Australia, Guam, Vladivostok",
+                  "(GMT +11:00) Magadan, Solomon Islands, New Caledonia"
+                ]),
+
+            new QuestionnaireItemDefinedOne("questionnaireItem", "From where will you participate in QoMEX?", true, ["Office / workplace", "Home", "Commuting", "Co-workgin space", "A combination of the above"]),
+
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Please rate your professional seniority", true, ["Undergrad / Master student", "PhD student", "Postdoc / Experienced researcher", "Faculty", "Industry"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Do you plan to participate in the entire conference?", true,
+                [
+                    "Yes, I blocked the conference days in my agenda",
+                    "No, I initially blocked the entire conference days but now since I'm not traveling, I need to participate in non-conference related activities / have family obligations",
+                    "No, I plan to only join for some of the days / sessions" ,
+                    "I'm not sure yet"
+                ]),
+
+            new QuestionnaireItemDefinedOne("questionnaireItem", "In which sessions do you plan to participate (more specifically)? ", true,
+                [
+                  "Tuesday, 11:45-12:00 Introduction and Welcome",
+                  "TODO"
+                ]),
+
+            new QuestionnaireItemDefinedOne("questionnaireItem", "Do you think that you will attend as many sessions as when you would have attended QoMEX as on-site venue?", true, ["Yes", "No, I would have attented more sessions if on-site", "I don't know"]),
+
+            new UIElementHTML(undefined, "<h1>Your goals when attending this conference as on-site conference (prior editions of this conference)</h1>"),
+            new UIElementHTML(undefined, `What are your main goals when attending a conference in person (such as QoMEX in the previous years)?`),
+
+            new UIElementHTML(undefined, "Please indicate to which extent the following aspects are important for you when attending this conference <b>on-site</b> (e.g., in previous years) on a scale from not at all to extremely important."),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It is important for me to present my work to this community", true, ["Not at all", "Slightly", "Undecided", "Moderate", "Very", "Extremely"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It is important for me to follow the paper/poster presentations", true, ["Not at all", "Slightly", "Undecided", "Moderate", "Very", "Extremely"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It is important for me to interact with other researchers I already know", true, ["Not at all", "Slightly", "Undecided", "Moderate", "Very", "Extremely"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It is important for me to meet new researchers", true, ["Not at all", "Slightly", "Undecided", "Moderate", "Very", "Extremely"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It is important for me to visit the city/country in which the conference is held", true, ["Not at all", "Slightly", "Undecided", "Moderate", "Very", "Extremely"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It is important for me to attend the social event(s)", true, ["Not at all", "Slightly", "Undecided", "Moderate", "Very", "Extremely"]),
+
+            new UIElementHTML(undefined, "<h1>(optional) Are there other aspects not listed above that you consider to be important when attending this conference</h1>"),
+            new UIElementHTML(undefined, `Please indicate to which extent the following aspects are important for you when attending QoMEX as *virtual* conference this year on a scale from not at all to extremely important`),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It is important for me to present my work to this community", true, ["Not at all", "Slightly", "Undecided", "Moderate", "Very", "Extremely"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It is important for me to follow the paper/poster presentations", true, ["Not at all", "Slightly", "Undecided", "Moderate", "Very", "Extremely"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It is important for me to interact with other researchers I already know", true, ["Not at all", "Slightly", "Undecided", "Moderate", "Very", "Extremely"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It is important for me to meet new researchers", true, ["Not at all", "Slightly", "Undecided", "Moderate", "Very", "Extremely"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It is important for me that there is a virtual social event", true, ["Not at all", "Slightly", "Undecided", "Moderate", "Very", "Extremely"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It is important for me to attend the virtual social event(s)", true, ["Not at all", "Slightly", "Undecided", "Moderate", "Very", "Extremely"]),
+            new QuestionnaireItemTextArea("questionnaireItem", "(optional) Are there other aspects not listed above that you consider to be important when attending QoMEX as a virtual conference?"),
+
+            new UIElementHTML(undefined, "Your <b>expectations</b> when attending this conference as virtual conference"),
+            new UIElementHTML(undefined, "What are your main expectations for the upcoming online edition of this conference?"),
+            new UIElementHTML(undefined, "Please indicate your expectations on the following aspects for this virtual edition of QoMEX relative to attending this conference <b>on-site</b> (e.g., in previous years) on a scale from much worse to much better)."),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It is important for me to present my work to this community", true, ["Not at all", "Slightly", "Undecided", "Moderate", "Very", "Extremely"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It is important for me to follow the paper/poster presentations", true, ["Not at all", "Slightly", "Undecided", "Moderate", "Very", "Extremely"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It is important for me to interact with other researchers I already know", true, ["Not at all", "Slightly", "Undecided", "Moderate", "Very", "Extremely"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It is important for me to meet new researchers", true, ["Not at all", "Slightly", "Undecided", "Moderate", "Very", "Extremely"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It is important for me that there is a virtual social event", true, ["Not at all", "Slightly", "Undecided", "Moderate", "Very", "Extremely"]),
+            new QuestionnaireItemDefinedOne("questionnaireItem", "It is important for me to attend the virtual social event(s)", true, ["Not at all", "Slightly", "Undecided", "Moderate", "Very", "Extremely"]),
+
+
+            new QuestionnaireItemDefinedMulti("questionnaireItem", "Do you expect any technical problems related to your participation in tis conference as an on-line conference? (multiple options are possible)", true,
+                [
+                  "No, I'm not expecting any technical problems",
+                  "Yes, video quality-related issues",
+                  "Yes, audio quality-related issues",
+                  "Yes, problems to join sessions",
+                  "Yes, (home) network connection"
+                ]),
+
+            new UIElementHTML(undefined, "Other comments (optional)"),
+            new QuestionnaireItemTextArea("questionnaireItem", "Do you have other feedback / wishes / comments that you would like to share?"),
+
+
+        );
+        screens.push(screen1);
+
+        //Most important: create the ScreenController
+        var screenController = new ScreenController(screens);
+
+        </script>
+
+        <script>
+        //Having the start()-function in an extra script-tag makes sure that it will be executed even if there are errors in the script-tag configuring TheFragebogen.
+        function start() {
+            document.body.innerHTML += "TheFragebogen loaded.";
+            if (typeof(screenController) === "undefined") {
+                document.body.innerHTML += "<br><i>Something went wrong:</i> Please check that thefragebogen.js was loaded and that the configuration is ok.";
+                return;
+            }
+            screenController.init(document.body);
+            screenController.start();
+        }
+
+        </script>
+    </head>
+
+    <body onload="start()">
+        <p>
+            TheFragebogen will be shown here.<br> If something fails while starting, an error message will be shown here.
+        </p>
+    </body>
+
+</html>
