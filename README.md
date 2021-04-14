@@ -33,6 +33,10 @@ The sources are available [here](questionnaires/).
 
 Our survey approach has already shown to be a useful tool to shed light on virtual conference participants' experiences of five venues we used it so far. One of the first conferences that moved to an online format was [PAM 2020](https://ccronline.sigcomm.org/wp-content/uploads/2020/08/sigcomm-ccr-final432.pdf). As an example of how to analyze data obtained with our survey approach, we provide the entire dataset and the scripts to analyze the participants experience of PAM 2020. The data is avilable [here](pam2020/).
 
-Note that we used an earlier version of our survey approach for PAM 2020, implemented in Google Forms:
+Note that we used an *older version* of our survey approach for PAM 2020, implemented in Google Forms:
 * [PAM 2020 Pre-conference questionnaire](https://github.com/ohohlfeld/virtual-conference-experience/blob/master/pam2020/PAM-Pre_conference_questionnaire.pdf)
 * [PAM 2020 Post-conference questionnaire](https://github.com/ohohlfeld/virtual-conference-experience/blob/master/pam2020/PAM-Post_conference_questionnaire.pdf)
+
+## Design Document
+
+We describe the design of our approach in this [paper](questionnaires/techreport/).
